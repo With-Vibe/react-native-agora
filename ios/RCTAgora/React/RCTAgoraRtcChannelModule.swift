@@ -15,8 +15,8 @@ class RCTAgoraRtcChannelModule: RCTEventEmitter {
 
     private var hasListeners = false
     private lazy var manager: RtcChannelManager = {
-        return RtcChannelManager() { [weak self] methodName, data in
-            self?.emit(methodName, data)
+        return RtcChannelManager() { methodName, data in
+            self.emit(methodName, data)
         }
     }()
 
@@ -73,7 +73,7 @@ class RCTAgoraRtcChannelModule: RCTEventEmitter {
     @objc func callMethod(_ methodName: String, _ params: NSDictionary?, _ resolve: RCTPromiseResolveBlock?, _ reject: RCTPromiseRejectBlock?) {
         if let `params` = params {
             if methodName == "create" {
-                params.setValue(engine(), forKey: "engine")
+                params.setValue(engine, forKey: "engine")
             }
             manager.perform(NSSelectorFromString(methodName + "::"), with: params, with: PromiseCallback(resolve, reject))
         } else {

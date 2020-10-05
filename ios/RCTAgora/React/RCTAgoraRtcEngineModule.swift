@@ -15,8 +15,8 @@ class RCTAgoraRtcEngineModule: RCTEventEmitter {
 
     private var hasListeners = false
     private lazy var manager: RtcEngineManager = {
-        return RtcEngineManager() { [weak self] methodName, data in
-            self?.emit(methodName, data)
+        return RtcEngineManager() { methodName, data in
+            self.emit(methodName, data)
         }
     }()
 
